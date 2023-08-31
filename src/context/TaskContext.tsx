@@ -34,13 +34,6 @@ interface TaskState {
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [taskState, dispatch] = useReducer(
     (state: TaskState, action: any) => {
-      if (action.type === 'SET_TASKS') {
-        return {
-          ...state,
-          tasks: action.payload,
-        }
-      }
-
       if (action.type === 'ADD_NEW_TASK') {
         return {
           ...state,
@@ -94,6 +87,13 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         }
       }
 
+      if (action.type === 'SET_TASKS') {
+        return {
+          ...state,
+          tasks: action.payload,
+        }
+      }
+
       return state
     },
     {
@@ -131,7 +131,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
       },
     })
 
-    const deletedTasks = tasks.filter((task) => task.id !== taskId)
+    const deletedTasks = tasks.filter((task: any) => task.id !== taskId)
     localStorage.setItem('tasks', JSON.stringify(deletedTasks))
   }
 
@@ -143,7 +143,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
       },
     })
 
-    const updatedTasks = tasks.map((task) => {
+    const updatedTasks = tasks.map((task: any) => {
       if (task.id === taskId) {
         return { ...task, isCompleted: true }
       }
@@ -160,7 +160,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
       },
     })
 
-    const updatedTasks = tasks.map((task) => {
+    const updatedTasks = tasks.map((task: any) => {
       if (task.id === taskId) {
         return { ...task, isCompleted: false }
       }
@@ -171,6 +171,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
   useEffect(() => {
     const storedTasks = localStorage.getItem('tasks')
+
     if (storedTasks) {
       dispatch({ type: 'SET_TASKS', payload: JSON.parse(storedTasks) })
     }
