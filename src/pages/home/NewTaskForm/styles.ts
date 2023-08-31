@@ -3,11 +3,10 @@ import { styled } from 'styled-components'
 export const NewTaskFormContainer = styled.div`
   width: 100%;
   max-width: 736px;
-  height: max-content;
+  height: 2.5rem;
 
   display: flex;
-  flex-direction: column;
-  gap: 53px;
+  align-items: center;
 
   img {
     height: 2.5rem;
@@ -21,7 +20,9 @@ export const NewTaskFormContainer = styled.div`
 
     input {
       width: 100%;
-      padding: 1rem;
+      padding: 0 1rem;
+
+      line-height: 0;
 
       border-radius: 8px;
       border: 1px solid ${(props) => props.theme['gray-700']};
@@ -34,7 +35,7 @@ export const NewTaskFormContainer = styled.div`
     }
 
     button {
-      padding: 1rem;
+      padding: 0.5rem 1rem;
 
       display: flex;
       justify-content: center;

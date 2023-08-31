@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface TaskTextContainerProps {
   isCompleted: boolean
@@ -6,7 +6,7 @@ interface TaskTextContainerProps {
 
 export const TaskContainer = styled.div`
   width: 100%;
-  max-width: 736px;
+  /* max-width: 300px; */
 
   display: flex;
   justify-content: space-between;
@@ -16,9 +16,9 @@ export const TaskContainer = styled.div`
   margin-bottom: 0.8rem;
 
   border-radius: 8px;
-  border: 1px solid ${(props) => props.theme['gray-500']};
+  border: 1px solid ${(props) => props.theme['gray-200']};
 
-  background-color: ${(props) => props.theme['white-200']};
+  background-color: ${(props) => props.theme['gray-100']};
   color: ${(props) => props.theme['gray-700']};
 
   button {
@@ -42,6 +42,22 @@ export const TaskContainer = styled.div`
       color: ${(props) => props.theme['white-100']};
     }
   }
+
+  ${(props) =>
+    props.isDragging &&
+    css`
+      border: 1px dashed ${props.theme['gray-200']};
+      border-radius: 4px;
+      background: transparent;
+      box-shadow: none;
+      cursor: grabbing;
+
+      span,
+      p,
+      button {
+        opacity: 0;
+      }
+    `}
 `
 export const CheckCircleContainer = styled.span`
   display: flex;

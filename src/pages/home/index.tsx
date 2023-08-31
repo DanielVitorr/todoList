@@ -9,12 +9,15 @@ import {
   InfoContainer,
   ListContainer,
   TaskListContainer,
+  TaskListNewTask,
+  TaskListCompleted,
 } from './styles'
 
 import Clipboard from '../../assets/clipboard.svg'
 import { Task } from './Task'
 import { useContext } from 'react'
 import { TaskContext } from '../../context/TaskContext'
+import { useDrop } from 'react-dnd'
 
 export function Home() {
   const { tasks } = useContext(TaskContext)
@@ -24,11 +27,22 @@ export function Home() {
     (task) => task.isCompleted === true,
   )
 
+  const [, dropRef] = useDrop({
+    accept: 'TASK',
+    drop: (item) => {
+      console.log(
+        'Dropped task:',
+        tasks.map((task) => {
+          return (item.id = task.id)
+        }),
+      )
+    },
+  })
+
   return (
     <HomeContainer>
-      <Header />
-
-      <TaskListContainer>
+      <header>
+        <Header />
         <NewTaskForm />
 
         <InfoContainer>
@@ -41,21 +55,32 @@ export function Home() {
             <Counter>{`${totalCountOfCompletedTasks.length} de ${totalTaskCount}`}</Counter>
           </DoneContent>
         </InfoContainer>
+      </header>
 
-        {tasks.map((task) => task.id).length === 0 ? (
-          <ListContainer>
-            <EmptyContent>
-              <img src={Clipboard} alt="" />
+      <TaskListContainer>
+        <TaskListNewTask>
+          <h1>Tarefas Novas/Pendentes</h1>
 
-              <div>
-                <strong>Você ainda não tem tarefas cadastradas</strong>
-                <p>Crie tarefas e organize seus itens a fazer</p>
-              </div>
-            </EmptyContent>
-          </ListContainer>
-        ) : (
-          <Task />
-        )}
+          {tasks.map((task) => task.id).length === 0 ? (
+            <ListContainer>
+              <EmptyContent>
+                <img src={Clipboard} alt="" />
+
+                <div>
+                  <strong>Você ainda não tem tarefas cadastradas</strong>
+                  <p>Crie tarefas e organize seus itens a fazer</p>
+                </div>
+              </EmptyContent>
+            </ListContainer>
+          ) : (
+            <ListContainer>
+              <Task />
+            </ListContainer>
+          )}
+        </TaskListNewTask>
+        <TaskListCompleted ref={dropRef}>
+          <h1>Concluídas</h1>
+        </TaskListCompleted>
       </TaskListContainer>
     </HomeContainer>
   )

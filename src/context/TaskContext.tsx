@@ -54,36 +54,38 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
       }
 
       if (action.type === 'MARK_AS_COMPLETE') {
-        const updatedTasks = state.tasks.filter(
-          (task) => task.id === action.payload.taskId,
-        )
-
-        const isCompletedValue = updatedTasks.map((task) => task.isCompleted)
-
-        if (isCompletedValue[0] === false) {
-          return {
-            ...state,
-            tasks: state.tasks.map(() => {
-              return updatedTasks.map((task) => (task.isCompleted = true))
-            }),
+        const updatedTasks = state.tasks.map((task) => {
+          if (task.id === action.payload.taskId) {
+            return {
+              ...task,
+              isCompleted: true,
+            }
           }
+
+          return task
+        })
+
+        return {
+          ...state,
+          tasks: updatedTasks,
         }
       }
 
       if (action.type === 'MARK_AS_INCOMPLETE') {
-        const updatedTasks = state.tasks.filter(
-          (task) => task.id === action.payload.taskId,
-        )
-
-        const isIncompletedValue = updatedTasks.map((task) => task.isCompleted)
-
-        if (isIncompletedValue[0] === true) {
-          return {
-            ...state,
-            tasks: state.tasks.map(() => {
-              return updatedTasks.map((task) => (task.isCompleted = false))
-            }),
+        const updatedTasks = state.tasks.map((task) => {
+          if (task.id === action.payload.taskId) {
+            return {
+              ...task,
+              isCompleted: false,
+            }
           }
+
+          return task
+        })
+
+        return {
+          ...state,
+          tasks: updatedTasks,
         }
       }
 
@@ -119,8 +121,6 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         newTask,
       },
     })
-
-    localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]))
   }
 
   function deleteTask(taskId: string) {
@@ -130,9 +130,6 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         taskId,
       },
     })
-
-    const deletedTasks = tasks.filter((task: any) => task.id !== taskId)
-    localStorage.setItem('tasks', JSON.stringify(deletedTasks))
   }
 
   function markTaskAsCompleted(taskId: string) {
@@ -142,14 +139,6 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         taskId,
       },
     })
-
-    const updatedTasks = tasks.map((task: any) => {
-      if (task.id === taskId) {
-        return { ...task, id: task.id, isCompleted: true, task: task.task }
-      }
-      return task
-    })
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   }
 
   function markTaskAsIncompleted(taskId: string) {
@@ -159,23 +148,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         taskId,
       },
     })
-
-    const updatedTasks = tasks.map((task: any) => {
-      if (task.id === taskId) {
-        return { ...task, id: task.id, isCompleted: false, task: task.task }
-      }
-      return task
-    })
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   }
-
-  useEffect(() => {
-    const storedTasks = localStorage.getItem('tasks')
-
-    if (storedTasks) {
-      dispatch({ type: 'SET_TASKS', payload: JSON.parse(storedTasks) })
-    }
-  }, [])
 
   return (
     <TaskContext.Provider
