@@ -24,8 +24,6 @@ export function Home() {
     (task) => task.isCompleted === true,
   )
 
-  console.log(tasks)
-
   return (
     <HomeContainer>
       <Header />

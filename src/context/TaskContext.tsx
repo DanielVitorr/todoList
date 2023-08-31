@@ -145,7 +145,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
     const updatedTasks = tasks.map((task: any) => {
       if (task.id === taskId) {
-        return { ...task, isCompleted: true }
+        return { ...task, id: task.id, isCompleted: true, task: task.task }
       }
       return task
     })
@@ -162,7 +162,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
     const updatedTasks = tasks.map((task: any) => {
       if (task.id === taskId) {
-        return { ...task, isCompleted: false }
+        return { ...task, id: task.id, isCompleted: true, task: task.task }
       }
       return task
     })
