@@ -17,7 +17,7 @@ import Clipboard from '../../assets/clipboard.svg'
 import { Task } from './Task'
 import { useContext } from 'react'
 import { TaskContext } from '../../context/TaskContext'
-import { useDrop } from 'react-dnd'
+// import { useDrop } from 'react-dnd'
 
 export function Home() {
   const { tasks } = useContext(TaskContext)
@@ -27,16 +27,12 @@ export function Home() {
     (task) => task.isCompleted === true,
   )
 
-  const [, dropRef] = useDrop({
-    accept: 'TASK',
-    drop: (item) => {
-      console.log(
-        'Dropped task:',
-        tasks.map((task) => {
-          return (item.id = task.id)
-        }),
-      )
-    },
+  const tasksFilteredTrue = tasks.filter(function (task) {
+    return task.isCompleted === true
+  })
+
+  const tasksFilteredFalse = tasks.filter(function (task) {
+    return task.isCompleted === false
   })
 
   return (
@@ -61,7 +57,7 @@ export function Home() {
         <TaskListNewTask>
           <h1>Tarefas Novas/Pendentes</h1>
 
-          {tasks.map((task) => task.id).length === 0 ? (
+          {tasks.map((task) => task.id).length === 0 && (
             <ListContainer>
               <EmptyContent>
                 <img src={Clipboard} alt="" />
@@ -72,14 +68,28 @@ export function Home() {
                 </div>
               </EmptyContent>
             </ListContainer>
-          ) : (
-            <ListContainer>
-              <Task />
-            </ListContainer>
           )}
+
+          {tasksFilteredFalse.map((task) => (
+            <Task
+              key={task.id}
+              id={task.id}
+              content={task.task}
+              isCompleted={task.isCompleted}
+            />
+          ))}
         </TaskListNewTask>
-        <TaskListCompleted ref={dropRef}>
+        <TaskListCompleted>
           <h1>Concluídas</h1>
+
+          {tasksFilteredTrue.map((task) => (
+            <Task
+              key={task.id}
+              id={task.id}
+              content={task.task}
+              isCompleted={task.isCompleted}
+            />
+          ))}
         </TaskListCompleted>
       </TaskListContainer>
     </HomeContainer>

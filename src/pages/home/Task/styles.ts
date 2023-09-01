@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 interface TaskTextContainerProps {
   isCompleted: boolean
@@ -42,22 +42,6 @@ export const TaskContainer = styled.div`
       color: ${(props) => props.theme['white-100']};
     }
   }
-
-  ${(props) =>
-    props.isDragging &&
-    css`
-      border: 1px dashed ${props.theme['gray-200']};
-      border-radius: 4px;
-      background: transparent;
-      box-shadow: none;
-      cursor: grabbing;
-
-      span,
-      p,
-      button {
-        opacity: 0;
-      }
-    `}
 `
 export const CheckCircleContainer = styled.span`
   display: flex;

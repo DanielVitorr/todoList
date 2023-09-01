@@ -27,6 +27,7 @@ export const TaskListContainer = styled.div`
 `
 export const InfoContainer = styled.div`
   width: 100%;
+
   /* max-width: 736px; */
 
   display: flex;
@@ -74,6 +75,7 @@ export const Counter = styled.div`
 `
 export const ListContainer = styled.div`
   width: 100%;
+  height: 100%;
   /* min-width: 736px; */
 
   display: flex;
@@ -81,13 +83,25 @@ export const ListContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
+  position: relative;
+
   margin-top: 0.8rem;
 `
 export const EmptyContent = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  text-align: center;
 
   color: ${(props) => props.theme['gray-200']};
 
@@ -109,24 +123,23 @@ export const TaskListNewTask = styled.div`
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
   }
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    background: transparent;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #888;
+    background: ${(props) => props.theme['gray-200']};
+    border-radius: 6px;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: ${(props) => props.theme['gray-300']};
   }
 `
 export const TaskListCompleted = styled.div`
@@ -143,23 +156,22 @@ export const TaskListCompleted = styled.div`
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
   }
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    background: transparent;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #888;
+    background: ${(props) => props.theme['gray-200']};
+    border-radius: 6px;
   }
 
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: ${(props) => props.theme['gray-300']};
   }
 `
