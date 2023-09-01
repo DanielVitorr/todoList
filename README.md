@@ -1,5 +1,5 @@
 <h1>Página de Lista de Tarefas (Todo List)</h1>
-<p>Esta é uma simples página web que permite aos usuários criar, gerenciar e acompanhar suas listas de tarefas. Você pode acessá-la em <a>https://danielvitorr.github.io/todoList/</a>.</p>
+<p>Esta é uma simples página web que permite aos usuários criar, gerenciar e acompanhar suas listas de tarefas. Você pode acessá-la em https://danielvitorr.github.io/todoList/.</p>
 
 <img src="/public/ToDoListInlustration.png" >
 
