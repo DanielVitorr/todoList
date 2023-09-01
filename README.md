@@ -36,6 +36,5 @@
 <h3>Licença</h3>
 <span>Este projeto está sob a Licença MIT.</span>
 
-
+<hr />
 <p>Esperamos que você aproveite a Página de Lista de Tarefas! Se tiver alguma dúvida ou sugestão, não hesite em entrar em contato com o autor ou contribuir para o projeto.</p>
->>>>>>> 9579760ad3ea1294a8ac649a0e7d508305694daf
