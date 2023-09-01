@@ -1,7 +1,7 @@
 <h1>Página de Lista de Tarefas (Todo List)</h1>
 <p>Esta é uma simples página web que permite aos usuários criar, gerenciar e acompanhar suas listas de tarefas. Você pode acessá-la em <a>https://danielvitorr.github.io/todoList/</a>.</p>
 
-<img src="/src//assets//ToDoListInlustration.png" >
+<img src="/public/ToDoListInlustration.png" >
 
 <h2>Recursos</h2>
 <ul>
@@ -36,5 +36,5 @@
 <h3>Licença</h3>
 <span>Este projeto está sob a Licença MIT.</span>
 
-<br />
+<hr />
 <p>Esperamos que você aproveite a Página de Lista de Tarefas! Se tiver alguma dúvida ou sugestão, não hesite em entrar em contato com o autor ou contribuir para o projeto.</p>
